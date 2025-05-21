@@ -16,7 +16,7 @@ tab1, tab2 = st.tabs(["🧬 Benchmark Metadata", "HT-SELEX"])
 # Load your DataFrame
 @st.cache_data
 def load_data():
-    return pd.read_csv('/Users/andrewsg/Desktop/bioqc-results.txt', sep='\t', header=0)
+    return pd.read_csv('/data/bioqc-results.txt', sep='\t', header=0)
 
 with tab1:
     df = load_data()
@@ -59,7 +59,7 @@ with tab1:
     with sidebar_col:
         if selected_tfs:
             for tf in selected_tfs:
-                motif_pkl = f'/Users/andrewsg/Desktop/canonical_motifs/{tf}.pkl'
+                motif_pkl = f'/data/canonical_motifs/{tf}.pkl'
                 if os.path.exists(motif_pkl):
                     with open(motif_pkl, 'rb') as f:
                         fig = pickle.load(f)
@@ -253,7 +253,7 @@ with tab1:
 
         with st.container(height=1200):
             if response["selected_rows"] is not None and len(response["selected_rows"]) > 0:
-                with open(f'/Users/andrewsg/Desktop/chip_pkl/{response.selected_data.accession[0]}.pkl', 'rb') as f:
+                with open(f'/data/chip_pkl/{response.selected_data.accession[0]}.pkl', 'rb') as f:
                     motifs_dict = pickle.load(f)
 
                 sort_by = st.radio(
